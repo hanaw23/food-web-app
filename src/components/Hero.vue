@@ -18,13 +18,12 @@
 .description {
   font-size: 25px;
   margin-bottom: 2rem;
-  color: #9c9999;
+  color: #a4a1a1;
 }
 .title {
   font-size: 55px;
   font-weight: bold;
   margin-bottom: 2rem;
-
   color: #89a86e;
 }
 .container-hero {

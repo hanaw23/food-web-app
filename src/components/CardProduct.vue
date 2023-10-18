@@ -41,7 +41,7 @@ defineProps({
   line-height: 1.2;
   margin-bottom: 2rem;
   margin-top: -0.5rem;
-  color: rgb(47, 46, 46);
+  color: #494646;
 }
 
 .card-body {

@@ -74,9 +74,7 @@ const loadPrevious = async () => {
 
     <div class="main-container">
       <div class="title">
-        <div class="recomended-title">
-          <h2>Recommended <strong>Foods</strong> This Week</h2>
-        </div>
+        <div class="recomended-title">Recommended Foods This Week</div>
       </div>
 
       <div class="grid-products">
@@ -123,6 +121,8 @@ const loadPrevious = async () => {
   padding-left: 10rem;
   padding-right: 10rem;
   color: #494646;
+  font-size: 20px;
+  font-weight: 700;
 }
 
 .btn-container {
@@ -149,7 +149,12 @@ button {
   background-color: #97bc78;
   color: #ffffff;
 }
-
+:hover.btn-next {
+  background-color: #6f8859;
+}
+:hover.btn-preview {
+  background-color: #414040;
+}
 .paginator {
   color: #b3adad;
 }
