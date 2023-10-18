@@ -1,20 +1,27 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import axios from "axios";
-import CardProduct from "../components/CardProduct.vue";
 
+import CardProduct from "../components/CardProduct.vue";
+import CardLoader from "../components/CardLoader.vue";
+import Hero from "../components/Hero.vue";
+
+// ==== VARIABLES ====
 const products = ref([]);
 const pagination = ref({
   page: 1,
   limit: 3,
   length: 0,
 });
+const loading = ref(false);
 
+// ==== METHODS ====
 // Fetch data from API
 onMounted(async () => {
   getProductMethods();
 });
 const getProductMethods = async () => {
+  loading.value = true;
   axios({
     method: "get",
     url: "http://localhost:3000/products?_page=1&_limit=3",
@@ -25,9 +32,11 @@ const getProductMethods = async () => {
       pagination.value.length += 3;
     })
     .catch((error) => console.log(error));
+  loading.value = false;
 };
 
 const loadMore = async () => {
+  loading.value = true;
   const urlWebProducts = `http://localhost:3000/products?_page=${(pagination.value.page += 1)}&_limit=${pagination.value.limit}`;
   axios({
     method: "get",
@@ -39,9 +48,11 @@ const loadMore = async () => {
       pagination.value.length += 3;
     })
     .catch((error) => console.log(error));
+  loading.value = false;
 };
 
 const loadPrevious = async () => {
+  loading.value = true;
   const urlWebProducts = `http://localhost:3000/products?_page=${(pagination.value.page -= 1)}&_limit=${pagination.value.limit}`;
   axios({
     method: "get",
@@ -53,34 +64,40 @@ const loadPrevious = async () => {
       pagination.value.length -= 3;
     })
     .catch((error) => console.log(error));
+  loading.value = false;
 };
 </script>
 
 <template>
-  <div class="main-container">
-    <div class="title">
-      <div>
-        <h2>Recomended <strong>Foods</strong> This Week</h2>
-      </div>
-    </div>
+  <div>
+    <Hero />
 
-    <div class="grid-products">
-      <div v-for="product in products" :key="product.id">
-        <CardProduct :product="product" />
-      </div>
-    </div>
-
-    <div class="btn-container">
-      <div>
-        <button v-if="pagination.length !== pagination.limit" class="btn-preview" type="button" @click="loadPrevious">Preview</button>
-        <div v-else />
+    <div class="main-container">
+      <div class="title">
+        <div class="recomended-title">
+          <h2>Recommended <strong>Foods</strong> This Week</h2>
+        </div>
       </div>
 
-      <p>Page {{ pagination.page }} of 3</p>
+      <div class="grid-products">
+        <div v-for="product in products" :key="product.id">
+          <CardLoader v-if="loading" />
+          <CardProduct v-else :product="product" />
+        </div>
+      </div>
 
-      <div>
-        <button v-if="pagination.length !== 9" type="button" class="btn-next" @click="loadMore">Next</button>
-        <div v-else />
+      <div class="btn-container">
+        <div>
+          <button v-if="pagination.length !== pagination.limit" class="btn-preview" type="button" @click="loadPrevious">Preview</button>
+          <div v-else />
+        </div>
+
+        <small class="paginator">page {{ pagination.page }} of 3</small>
+
+        <div>
+          <button v-if="pagination.length !== 9" type="button" class="btn-next" @click="loadMore">Next</button>
+          <div v-else />
+        </div>
       </div>
     </div>
   </div>
@@ -88,10 +105,8 @@ const loadPrevious = async () => {
 
 <style scoped>
 .main-container {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto;
+  margin-top: 5rem;
 }
 .title {
   margin-bottom: 2rem;
@@ -100,13 +115,22 @@ const loadPrevious = async () => {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 1rem;
+  padding-left: 10rem;
+  padding-right: 10rem;
+}
+
+.recomended-title {
+  padding-left: 10rem;
+  padding-right: 10rem;
+  color: #494646;
 }
 
 .btn-container {
   display: flex;
   justify-content: space-between;
-  margin-top: 1rem;
-  margin-bottom: 2rem;
+  margin-top: 55px;
+  padding-left: 10rem;
+  padding-right: 16rem;
 }
 
 button {
@@ -122,17 +146,11 @@ button {
 }
 
 .btn-next {
-  background-color: #0a5793;
+  background-color: #97bc78;
   color: #ffffff;
 }
 
-.dot {
-  height: 0.5rem;
-  width: 0.5rem;
-  background-color: #fcf6f6;
-  border-radius: 50%;
-  display: inline-block;
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
+.paginator {
+  color: #b3adad;
 }
 </style>

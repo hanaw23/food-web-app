@@ -1,6 +1,4 @@
 <script setup>
-import Card from "primevue/card";
-
 defineProps({
   product: {
     type: Object,
@@ -15,8 +13,7 @@ defineProps({
     <div class="card-body">
       <h5 class="card-title">{{ product.nama }}</h5>
       <div class="card-price-container">
-        Harga:
-        <span class="card-price">{{ product.harga }}</span>
+        <span class="card-price"> Rp. {{ product.harga }}, -</span>
       </div>
     </div>
   </div>
@@ -26,7 +23,7 @@ defineProps({
 .card {
   width: 18rem;
   border: 1px solid #fcf6f6;
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.125);
+  box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, 0.125);
   border-radius: 15px;
 }
 
@@ -34,6 +31,8 @@ defineProps({
   width: 100%;
   height: 15vw;
   object-fit: cover;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
 }
 
 .card-title {
@@ -42,6 +41,7 @@ defineProps({
   line-height: 1.2;
   margin-bottom: 2rem;
   margin-top: -0.5rem;
+  color: rgb(47, 46, 46);
 }
 
 .card-body {
@@ -51,12 +51,11 @@ defineProps({
 .card-price-container {
   font-size: 0.875rem;
   margin-bottom: 0.75rem;
-  text-align: right;
 }
 
 .card-price {
-  font-size: 1rem;
-
-  color: #18a1e6;
+  font-size: 12px;
+  color: #8a8d8f;
+  font-weight: bold;
 }
 </style>
