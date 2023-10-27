@@ -24,7 +24,7 @@ const getProductMethods = async () => {
   loading.value = true;
   axios({
     method: "get",
-    url: "http://localhost:3000/products?_page=1&_limit=3",
+    url: "https://my-json-server.typicode.com/hanaw23/food-data/products?_page=1&_limit=3",
     responseType: "stream",
   })
     .then((response) => {
@@ -37,7 +37,7 @@ const getProductMethods = async () => {
 
 const loadMore = async () => {
   loading.value = true;
-  const urlWebProducts = `http://localhost:3000/products?_page=${(pagination.value.page += 1)}&_limit=${pagination.value.limit}`;
+  const urlWebProducts = `https://my-json-server.typicode.com/hanaw23/food-data/products?_page=${(pagination.value.page += 1)}&_limit=${pagination.value.limit}`;
   axios({
     method: "get",
     url: urlWebProducts,
@@ -53,7 +53,7 @@ const loadMore = async () => {
 
 const loadPrevious = async () => {
   loading.value = true;
-  const urlWebProducts = `http://localhost:3000/products?_page=${(pagination.value.page -= 1)}&_limit=${pagination.value.limit}`;
+  const urlWebProducts = `https://my-json-server.typicode.com/hanaw23/food-data/products?_page=${(pagination.value.page -= 1)}&_limit=${pagination.value.limit}`;
   axios({
     method: "get",
     url: urlWebProducts,
