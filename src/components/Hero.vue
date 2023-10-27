@@ -6,7 +6,7 @@
       <h1 class="title">Welcome to Foody Mart</h1>
       <p class="description">What are you going to eat today?</p>
     </div>
-    <img src="assets/images/ilustrasi.png" alt="hero" class="logo" />
+    <img src="/assets/images/ilustrasi.png" alt="hero" class="logo" />
   </div>
 </template>
 
